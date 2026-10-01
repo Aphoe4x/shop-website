@@ -26,7 +26,9 @@ A full-stack e-commerce website with a Nigerian aesthetic, built with React, Nod
 
 ```
 shop-website/
-├── client/                 # React frontend (Vite)
+├── AGENTS.md              # Continuation notes for coding agents
+├── PRD.md                 # Product and phase overview
+├── client/                # React frontend (Vite)
 │   ├── src/
 │   │   ├── components/     # Navbar, ProductCard
 │   │   ├── context/        # CartContext, AuthContext
@@ -37,7 +39,7 @@ shop-website/
 │   ├── index.html
 │   ├── vite.config.js
 │   └── package.json
-├── server/                 # Node.js/Express backend
+├── server/                # Node.js/Express backend
 │   ├── src/
 │   │   ├── config/         # Environment config
 │   │   ├── routes/         # auth, products, orders
@@ -46,7 +48,9 @@ shop-website/
 │   ├── .env.example
 │   └── package.json
 ├── supabase-schema.sql    # Database schema + sample data
-└── README.md
+├── update-images.sql      # Optional image-related SQL updates
+├── README.md
+└── .gitignore
 ```
 
 ## Setup Instructions
