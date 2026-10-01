@@ -1,6 +1,6 @@
 function Login() {
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3001/api/auth/google';
+    window.location.href = 'https://shop-website-6o9u.onrender.com/api/auth/google';
   };
 
   return (

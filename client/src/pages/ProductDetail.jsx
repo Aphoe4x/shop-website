@@ -15,7 +15,7 @@ function ProductDetail() {
 
   async function fetchProduct() {
     try {
-      const res = await fetch(`http://localhost:3001/api/products/${id}`);
+      const res = await fetch(`https://shop-website-6o9u.onrender.com/api/products/${id}`);
       const data = await res.json();
       setProduct(data);
     } catch (error) {

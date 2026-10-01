@@ -46,7 +46,7 @@ function Home() {
 
   async function fetchProducts() {
     try {
-      const res = await fetch('http://localhost:3001/api/products');
+      const res = await fetch('https://shop-website-6o9u.onrender.com/api/products');
       const data = await res.json();
       setProducts(data);
       setFilteredProducts(data);

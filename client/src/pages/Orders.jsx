@@ -16,7 +16,7 @@ function Orders() {
 
   async function fetchOrders() {
     try {
-      const res = await fetch(`http://localhost:3001/api/orders/${user.email}`);
+      const res = await fetch(`https://shop-website-6o9u.onrender.com/api/orders/${user.email}`);
       const data = await res.json();
       setOrders(data);
     } catch (error) {

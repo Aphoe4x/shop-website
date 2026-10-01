@@ -37,7 +37,7 @@ function Checkout() {
         })),
       };
 
-      const res = await fetch('http://localhost:3001/api/orders', {
+      const res = await fetch('https://shop-website-6o9u.onrender.com/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData),
