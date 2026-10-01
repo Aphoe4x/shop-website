@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -5,19 +6,30 @@ import { useAuth } from '../context/AuthContext';
 function Navbar() {
   const { totalItems } = useCart();
   const { user, logout } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <nav className="navbar">
       <div className="container navbar-content">
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" onClick={closeMenu}>
           Shopping
         </Link>
-        <div className="navbar-links">
-          <Link to="/">Products</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/orders">My Orders</Link>
-          <Link to="/checkout" className="cart-link">
+
+        <button className="hamburger" onClick={toggleMenu} aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div className={`navbar-links ${menuOpen ? 'active' : ''}`}>
+          <Link to="/" onClick={closeMenu}>Products</Link>
+          <Link to="/about" onClick={closeMenu}>About</Link>
+          <Link to="/contact" onClick={closeMenu}>Contact</Link>
+          <Link to="/orders" onClick={closeMenu}>My Orders</Link>
+          <Link to="/checkout" className="cart-link" onClick={closeMenu}>
             Cart
             {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
           </Link>
@@ -29,7 +41,7 @@ function Navbar() {
               </button>
             </div>
           ) : (
-            <Link to="/login" className="btn btn-primary">
+            <Link to="/login" className="btn btn-primary" onClick={closeMenu}>
               Login
             </Link>
           )}

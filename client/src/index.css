@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --accent: #0ea5e9;
-  --accent-dark: #0284c7;
-  --accent-subtle: #e0f2fe;
+  --accent: #1a1a2e;
+  --accent-dark: #16213e;
+  --accent-subtle: #f0f0f0;
   --bg-primary: #fafafa;
   --bg-secondary: #f0f0f0;
   --bg-tertiary: #e8e8e8;
@@ -91,7 +91,7 @@ input:focus, textarea:focus {
 
 .btn-primary:hover {
   background: var(--accent-dark);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 26, 46, 0.3);
 }
 
 .btn-outline {
@@ -124,8 +124,7 @@ input:focus, textarea:focus {
 
 /* Navbar */
 .navbar {
-  background: var(--bg-primary);
-  border-bottom: 1px solid var(--border-color);
+  background: var(--accent);
   padding: 0.875rem 0;
   position: sticky;
   top: 0;
@@ -141,7 +140,7 @@ input:focus, textarea:focus {
 .navbar-logo {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--accent);
+  color: #fff;
   letter-spacing: -0.5px;
 }
 
@@ -152,14 +151,14 @@ input:focus, textarea:focus {
 }
 
 .navbar-links a {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
   font-size: 0.9rem;
   transition: color 0.2s;
 }
 
 .navbar-links a:hover {
-  color: var(--accent);
+  color: #fff;
 }
 
 .cart-link {
@@ -170,8 +169,8 @@ input:focus, textarea:focus {
   position: absolute;
   top: -8px;
   right: -12px;
-  background: var(--accent);
-  color: #fff;
+  background: #fff;
+  color: var(--accent);
   font-size: 0.65rem;
   padding: 2px 5px;
   border-radius: 50%;
@@ -185,9 +184,50 @@ input:focus, textarea:focus {
 }
 
 .user-name {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
   font-size: 0.9rem;
+}
+
+.navbar .btn-outline {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.navbar .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+  color: #fff;
+}
+
+.navbar .btn-primary {
+  background: #fff;
+  color: var(--accent);
+}
+
+.navbar .btn-primary:hover {
+  background: var(--bg-secondary);
+  color: var(--accent-dark);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s;
 }
 
 /* Hero */
@@ -461,7 +501,7 @@ input:focus, textarea:focus {
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
-  color: var(--accent);
+  color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -648,8 +688,44 @@ input:focus, textarea:focus {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--accent);
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.75rem;
+    transform: translateY(-150%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .navbar-links.active {
+    transform: translateY(0);
+  }
+
+  .navbar-links a {
+    padding: 0.5rem 0;
+    width: 100%;
+  }
+
+  .user-menu {
+    flex-direction: column;
+    width: 100%;
+  }
+
   .hero h1 {
     font-size: 1.75rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
   }
 
   .checkout-grid {
@@ -660,15 +736,50 @@ input:focus, textarea:focus {
     position: static;
   }
 
-  .navbar-links {
-    gap: 0.75rem;
-  }
-
   .newsletter-form {
     flex-direction: column;
   }
 
   .search-bar {
     flex-direction: column;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
   }
 }
