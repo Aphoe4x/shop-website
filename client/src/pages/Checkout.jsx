@@ -65,7 +65,7 @@ function Checkout() {
     return (
       <div style={{ textAlign: 'center', padding: '4rem 0' }}>
         <h2>Your cart is empty</h2>
-        <p style={{ color: 'var(--gray)', margin: '1rem 0' }}>Add some products before checking out.</p>
+        <p className="checkout-empty-text">Add some products before checking out.</p>
         <a href="/" className="btn btn-primary">Continue Shopping</a>
       </div>
     );
@@ -93,7 +93,7 @@ function Checkout() {
             <label>Address</label>
             <input name="address" value={form.address} onChange={handleChange} required placeholder="123 Broad Street" />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="form-row">
             <div className="form-group">
               <label>City</label>
               <input name="city" value={form.city} onChange={handleChange} required placeholder="Lagos" />
@@ -116,7 +116,7 @@ function Checkout() {
               <span>₦{(item.price * item.quantity).toFixed(2)}</span>
             </div>
           ))}
-          <div className="summary-item" style={{ marginTop: '0.5rem', color: 'var(--gray)' }}>
+          <div className="summary-item summary-delivery">
             <span>Delivery</span>
             <span>Free</span>
           </div>
