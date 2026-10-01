@@ -23,26 +23,15 @@ function Home() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   useEffect(() => {
-    if (searchQuery.trim() === '') {
-      setFilteredProducts(products);
-    } else {
-      const query = searchQuery.toLowerCase();
-      setFilteredProducts(
-        products.filter(
-          (p) =>
-            p.name.toLowerCase().includes(query) ||
-            p.description.toLowerCase().includes(query) ||
-            (p.category && p.category.toLowerCase().includes(query))
-        )
-      );
-    }
-  }, [searchQuery, products]);
+    filterProducts();
+  }, [searchQuery, selectedCategory, products]);
 
   async function fetchProducts() {
     try {
@@ -55,6 +44,26 @@ function Home() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function filterProducts() {
+    let result = products;
+
+    if (selectedCategory !== 'All') {
+      result = result.filter((p) => p.category === selectedCategory);
+    }
+
+    if (searchQuery.trim() !== '') {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(
+        (p) =>
+          p.name.toLowerCase().includes(query) ||
+          p.description.toLowerCase().includes(query) ||
+          (p.category && p.category.toLowerCase().includes(query))
+      );
+    }
+
+    setFilteredProducts(result);
   }
 
   return (
@@ -84,7 +93,7 @@ function Home() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="btn btn-primary" onClick={() => {}}>
+            <button className="btn btn-primary" onClick={filterProducts}>
               Search
             </button>
           </div>
@@ -97,8 +106,20 @@ function Home() {
           <h2 className="section-title">Shop by Category</h2>
           <p className="section-subtitle">Find exactly what you need</p>
           <div className="categories-grid">
+            <div
+              className={`category-card ${selectedCategory === 'All' ? 'active' : ''}`}
+              onClick={() => setSelectedCategory('All')}
+            >
+              <div className="category-icon">🛍️</div>
+              <h3>All Products</h3>
+              <p>View everything</p>
+            </div>
             {CATEGORIES.map((cat) => (
-              <div key={cat.name} className="category-card">
+              <div
+                key={cat.name}
+                className={`category-card ${selectedCategory === cat.name ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat.name)}
+              >
                 <div className="category-icon">{cat.icon}</div>
                 <h3>{cat.name}</h3>
                 <p>{cat.desc}</p>
@@ -112,16 +133,20 @@ function Home() {
       <section className="products" id="products">
         <div className="container">
           <h2 className="section-title">
-            {searchQuery ? `Search Results for "${searchQuery}"` : 'Featured Products'}
+            {selectedCategory === 'All'
+              ? 'Featured Products'
+              : `${selectedCategory} Products`}
           </h2>
           <p className="section-subtitle">
-            {searchQuery ? `${filteredProducts.length} products found` : 'Our most loved items'}
+            {searchQuery
+              ? `${filteredProducts.length} products found`
+              : `${filteredProducts.length} products`}
           </p>
           {loading ? (
             <p style={{ textAlign: 'center', color: 'var(--text-tertiary)' }}>Loading products...</p>
           ) : filteredProducts.length === 0 ? (
             <p style={{ textAlign: 'center', color: 'var(--text-tertiary)' }}>
-              No products found. Try a different search term.
+              No products found. Try a different search or category.
             </p>
           ) : (
             <div className="products-grid">
