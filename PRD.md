@@ -1,7 +1,7 @@
 # Product Requirements Document (PRD)
 
 ## Product concept
-NaijaShop is a small e-commerce storefront for a Nigerian boutique business. The shop sells everyday products with a local aesthetic and supports direct checkout for customers.
+Shopping is a small e-commerce storefront for a Nigerian boutique business. The shop sells everyday products with a local aesthetic and supports direct checkout for customers.
 
 ## Goals
 - Showcase products clearly and attractively.

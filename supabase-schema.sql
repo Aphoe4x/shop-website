@@ -1,4 +1,4 @@
--- Supabase Database Schema for NaijaShop
+-- Supabase Database Schema for Shopping
 -- Run this in your Supabase SQL editor
 
 -- Users table

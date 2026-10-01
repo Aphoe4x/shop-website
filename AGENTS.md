@@ -15,6 +15,9 @@ This repo is a full-stack shop website for a Nigerian-focused boutique business.
 - Use the server environment variables from `server/.env` for production or local runs.
 - Frontend reads the API base URL from `VITE_API_URL` when available; otherwise it falls back to the Render deployment URL.
 - The server exposes `/api/auth`, `/api/products`, and `/api/orders` and should be run on port 3001 locally.
+- Branding is "Shopping" everywhere (code, docs, emails). Keep names and colors consistent.
+- CORS on the backend must allow both localhost and the deployed Vercel origin; avoid trailing slashes in `CLIENT_URL`.
+- The frontend is a SPA and requires `client/vercel.json` rewrites so client-side routes do not 404 on Vercel.
 
 ## Core behavior to preserve
 - Sign in via Google and keep the user in `localStorage` so the session survives browser reloads.

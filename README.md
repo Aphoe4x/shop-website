@@ -1,4 +1,4 @@
-# NaijaShop - Nigerian E-Commerce Website
+# Shopping - Nigerian E-Commerce Website
 
 A full-stack e-commerce website with a Nigerian aesthetic, built with React, Node.js, Supabase, Mailgun, and Google Auth.
 
@@ -89,7 +89,7 @@ npm install
    ```
    MAILGUN_API_KEY=your-mailgun-api-key
    MAILGUN_DOMAIN=mg.yourdomain.com
-   MAILGUN_FROM_EMAIL=NaijaShop <noreply@yourdomain.com>
+   MAILGUN_FROM_EMAIL=Shopping <noreply@yourdomain.com>
    ```
 
 ### 4. Set Up Google Auth
