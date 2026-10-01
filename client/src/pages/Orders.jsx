@@ -16,7 +16,8 @@ function Orders() {
 
   async function fetchOrders() {
     try {
-      const res = await fetch(`https://shop-website-6o9u.onrender.com/api/orders/${user.email}`);
+      const API_URL = import.meta.env.VITE_API_URL || 'https://shop-website-6o9u.onrender.com/api';
+      const res = await fetch(`${API_URL}/orders/${user.email}`);
       const data = await res.json();
       setOrders(data);
     } catch (error) {

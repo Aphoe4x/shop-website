@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://shop-website-6o9u.onrender.com/api';
+
 const CATEGORIES = [
   { icon: '👗', name: 'Fashion', desc: 'Ankara, Agbada & more' },
   { icon: '🍲', name: 'Food & Groceries', desc: 'Local & imported' },
@@ -35,7 +37,7 @@ function Home() {
 
   async function fetchProducts() {
     try {
-      const res = await fetch('https://shop-website-6o9u.onrender.com/api/products');
+      const res = await fetch(`${API_URL}/products`);
       const data = await res.json();
       setProducts(data);
       setFilteredProducts(data);

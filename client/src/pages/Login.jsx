@@ -1,6 +1,7 @@
 function Login() {
   const handleGoogleLogin = () => {
-    window.location.href = 'https://shop-website-6o9u.onrender.com/api/auth/google';
+    const API_URL = import.meta.env.VITE_API_URL || 'https://shop-website-6o9u.onrender.com/api';
+    window.location.href = `${API_URL}/auth/google`;
   };
 
   return (

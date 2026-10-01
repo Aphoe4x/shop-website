@@ -15,7 +15,8 @@ function ProductDetail() {
 
   async function fetchProduct() {
     try {
-      const res = await fetch(`https://shop-website-6o9u.onrender.com/api/products/${id}`);
+      const API_URL = import.meta.env.VITE_API_URL || 'https://shop-website-6o9u.onrender.com/api';
+      const res = await fetch(`${API_URL}/products/${id}`);
       const data = await res.json();
       setProduct(data);
     } catch (error) {

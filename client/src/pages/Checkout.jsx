@@ -37,7 +37,8 @@ function Checkout() {
         })),
       };
 
-      const res = await fetch('https://shop-website-6o9u.onrender.com/api/orders', {
+      const API_URL = import.meta.env.VITE_API_URL || 'https://shop-website-6o9u.onrender.com/api';
+      const res = await fetch(`${API_URL}/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData),
