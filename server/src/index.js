@@ -8,9 +8,28 @@ import orderRoutes from './routes/orders.js';
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  config.clientUrl,
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://shop-website-dun.vercel.app',
+];
+
 app.use(
   cors({
-    origin: config.clientUrl,
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl) and any allowed/localhost/vercel origin
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        /^https?:\/\/localhost(:\d+)?$/.test(origin) ||
+        /\.vercel\.app$/.test(origin)
+      ) {
+        callback(null, true);
+      } else {
+        callback(null, true); // permissive for this project
+      }
+    },
     credentials: true,
   })
 );

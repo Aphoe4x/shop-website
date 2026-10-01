@@ -7,8 +7,9 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'https://shop-website-6o9u.onrender.com',
         changeOrigin: true,
+        secure: false,
       },
     },
   },
