@@ -162,19 +162,29 @@ input:focus, textarea:focus {
 }
 
 .cart-link {
-  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .cart-badge {
-  position: absolute;
-  top: -8px;
-  right: -12px;
   background: #fff;
   color: var(--accent);
   font-size: 0.65rem;
-  padding: 2px 5px;
-  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border-radius: 999px;
   font-weight: 700;
+  line-height: 1;
+}
+
+.navbar .user-menu {
+  padding-left: 0.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .user-menu {
@@ -937,6 +947,32 @@ input:focus, textarea:focus {
 }
 
 /* Responsive */
+
+/* Tablet and below — tighten spacing, keep desktop nav while it fits */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .hero {
+    padding: 3.5rem 0;
+  }
+
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .navbar-links {
+    gap: 1rem;
+  }
+
+  .product-detail-grid {
+    gap: 2rem;
+    padding: 1.75rem;
+  }
+}
+
+/* Mobile — collapsible nav */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
@@ -992,9 +1028,7 @@ input:focus, textarea:focus {
   }
 
   .cart-badge {
-    position: static;
     margin-left: 0.5rem;
-    transform: none;
   }
 
   .navbar-links .btn {
@@ -1052,40 +1086,9 @@ input:focus, textarea:focus {
   .order-summary {
     position: static;
   }
-
-  .newsletter-form {
-    flex-direction: column;
-  }
-
-  .newsletter-form .btn {
-    width: 100%;
-  }
-
-  .search-bar {
-    flex-direction: column;
-  }
-
-  .search-bar .btn {
-    width: 100%;
-  }
-
-  .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .trust-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
+/* Small phones */
 @media (max-width: 480px) {
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1109,6 +1112,22 @@ input:focus, textarea:focus {
 
   .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form .btn {
+    width: 100%;
+  }
+
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .search-bar .btn {
+    width: 100%;
   }
 
   .hero-buttons {
