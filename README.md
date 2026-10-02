@@ -87,10 +87,26 @@ npm install
 4. Note your domain (e.g., `mg.yourdomain.com`)
 5. Add these to your `.env`:
    ```
+   EMAIL_PROVIDER=mailgun
    MAILGUN_API_KEY=your-mailgun-api-key
    MAILGUN_DOMAIN=mg.yourdomain.com
    MAILGUN_FROM_EMAIL=Shopping <noreply@yourdomain.com>
    ```
+
+> **Sending to third parties:** Mailgun's free **sandbox domain** can only
+> send to up to 5 **authorized recipients**. To email *any* customer you must
+> verify a domain you own (add its SPF/DKIM/CNAME/MX records in Mailgun →
+> Domains → Add Domain). The free plan includes one custom domain.
+
+**Optional local fallback (not the required provider):** to send without a
+domain during development, set `EMAIL_PROVIDER=gmail` and provide a Gmail
+address + App Password:
+```
+EMAIL_PROVIDER=gmail
+GMAIL_USER=you@gmail.com
+GMAIL_APP_PASSWORD=your-16-char-app-password
+```
+Mailgun remains the default and the required integration.
 
 ### 4. Set Up Google Auth
 

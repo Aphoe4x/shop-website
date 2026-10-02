@@ -1,4 +1,9 @@
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
 function Login() {
+  const { user, logout } = useAuth();
+
   const handleGoogleLogin = () => {
     const API_URL =
       import.meta.env.VITE_API_URL ||
@@ -7,6 +12,23 @@ function Login() {
         : 'https://shop-website-6o9u.onrender.com/api');
     window.location.href = `${API_URL}/auth/google`;
   };
+
+  if (user) {
+    return (
+      <div className="login-card">
+        <h1 className="login-title">You're signed in</h1>
+        <p className="login-subtitle">
+          Welcome back, {user.name?.split(' ')[0] || user.email}
+        </p>
+
+        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link to="/" className="btn btn-primary">Continue Shopping</Link>
+          <Link to="/orders" className="btn btn-outline">My Orders</Link>
+          <button onClick={logout} className="btn btn-outline">Logout</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="login-card">

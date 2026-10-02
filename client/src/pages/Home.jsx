@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
+import { useAuth } from '../context/AuthContext';
 
 const API_URL =
   import.meta.env.VITE_API_URL ||
@@ -25,6 +26,7 @@ const TRUST_BADGES = [
 ];
 
 function Home() {
+  const { user, logout } = useAuth();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -84,7 +86,14 @@ function Home() {
           </p>
           <div className="hero-buttons">
             <a href="#products" className="btn btn-primary">Shop Now</a>
-            <Link to="/login" className="btn btn-outline">Sign In</Link>
+            {user ? (
+              <>
+                <Link to="/orders" className="btn btn-outline">My Orders</Link>
+                <button onClick={logout} className="btn btn-outline">Logout</button>
+              </>
+            ) : (
+              <Link to="/login" className="btn btn-outline">Sign In</Link>
+            )}
           </div>
         </div>
       </section>

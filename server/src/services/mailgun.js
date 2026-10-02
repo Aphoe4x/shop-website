@@ -1,9 +1,27 @@
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
+import nodemailer from 'nodemailer';
 import { config } from '../config/index.js';
 
 const mailgun = new Mailgun(formData);
 const mg = mailgun.client({ username: 'api', key: config.mailgun.apiKey });
+
+// Gmail SMTP transport (used when EMAIL_PROVIDER=gmail)
+let gmailTransport = null;
+function getGmailTransport() {
+  if (!gmailTransport) {
+    const user = process.env.GMAIL_USER;
+    const pass = process.env.GMAIL_APP_PASSWORD;
+    if (!user || !pass) {
+      throw new Error('GMAIL_USER and GMAIL_APP_PASSWORD are required for Gmail SMTP');
+    }
+    gmailTransport = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user, pass },
+    });
+  }
+  return gmailTransport;
+}
 
 const BRAND = 'Shopping';
 const SITE_URL = process.env.CLIENT_URL || 'http://localhost:5173';
@@ -21,13 +39,40 @@ function escapeHtml(value) {
 const naira = (amount) => `&#8358;${Number(amount).toFixed(2)}`;
 
 /**
- * Send an email using Mailgun
+ * Send an email using the configured provider.
+ * Set EMAIL_PROVIDER=gmail to use Gmail SMTP (sends to anyone).
+ * Otherwise falls back to Mailgun.
  * @param {string} to - Recipient email address
  * @param {string} subject - Email subject
  * @param {string} text - Plain text body
  * @param {string} html - HTML body (optional)
  */
 export async function sendEmail(to, subject, text, html = null) {
+  if (config.emailProvider === 'gmail') {
+    return sendViaGmail(to, subject, text, html);
+  }
+  return sendViaMailgun(to, subject, text, html);
+}
+
+async function sendViaGmail(to, subject, text, html) {
+  try {
+    const transport = getGmailTransport();
+    const info = await transport.sendMail({
+      from: config.gmail.user,
+      to,
+      subject,
+      text,
+      ...(html ? { html } : {}),
+    });
+    console.log(`Email (Gmail) sent to ${to}:`, info.messageId);
+    return info;
+  } catch (error) {
+    console.error('Gmail SMTP error:', error);
+    throw new Error(`Failed to send email: ${error.message}`);
+  }
+}
+
+async function sendViaMailgun(to, subject, text, html) {
   const data = {
     from: config.mailgun.fromEmail,
     to,
