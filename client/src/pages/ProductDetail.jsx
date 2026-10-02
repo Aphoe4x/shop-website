@@ -1,13 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 
 function ProductDetail() {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const { showToast } = useToast();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+
+  const handleAdd = () => {
+    addToCart(product, quantity);
+    showToast(`${product.name} added to cart`, 'View cart →', '/checkout');
+  };
 
   useEffect(() => {
     fetchProduct();
@@ -65,7 +72,7 @@ function ProductDetail() {
 
           <button
             className="btn btn-primary btn-block"
-            onClick={() => addToCart(product, quantity)}
+            onClick={handleAdd}
           >
             Add to Cart
           </button>

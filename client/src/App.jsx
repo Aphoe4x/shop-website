@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Toast from './components/Toast';
+import FloatingCart from './components/FloatingCart';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
@@ -27,6 +29,8 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
         </Routes>
       </main>
+      <FloatingCart />
+      <Toast />
     </>
   );
 }

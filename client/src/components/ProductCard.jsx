@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const { showToast } = useToast();
+
+  const handleAdd = () => {
+    addToCart(product);
+    showToast(`${product.name} added to cart`, 'View cart →', '/checkout');
+  };
 
   return (
     <div className="product-card">
@@ -22,10 +29,7 @@ function ProductCard({ product }) {
         <p className="product-description">{product.description}</p>
         <div className="product-footer">
           <span className="product-price">₦{product.price.toFixed(2)}</span>
-          <button
-            className="btn btn-primary add-to-cart"
-            onClick={() => addToCart(product)}
-          >
+          <button className="btn btn-primary add-to-cart" onClick={handleAdd}>
             Add to Cart
           </button>
         </div>

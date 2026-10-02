@@ -946,7 +946,135 @@ input:focus, textarea:focus {
   font-size: 0.9rem;
 }
 
+/* Toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 84px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  z-index: 200;
+  max-width: calc(100vw - 2rem);
+  animation: toast-in 0.25s ease;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.toast-message {
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 50vw;
+}
+
+.toast-action {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  text-decoration: underline;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0 0.25rem;
+}
+
+.toast-close:hover {
+  color: #fff;
+}
+
+/* Floating cart (mobile) */
+.floating-cart {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+  z-index: 150;
+}
+
+.floating-cart-icon {
+  font-size: 1.2rem;
+}
+
+.floating-cart-text {
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.floating-cart-total {
+  font-weight: 700;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state h2 {
+  margin-bottom: 0.5rem;
+}
+
+.empty-state .btn {
+  margin-top: 1rem;
+}
+
+.checkout-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.continue-link {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
 /* Responsive */
+
+/* Desktop: navbar cart is always visible, so hide the floating cart */
+@media (min-width: 769px) {
+  .floating-cart {
+    display: none;
+  }
+
+  .toast {
+    bottom: 1.5rem;
+  }
+}
 
 /* Tablet and below — tighten spacing, keep desktop nav while it fits */
 @media (max-width: 1024px) {
@@ -974,6 +1102,11 @@ input:focus, textarea:focus {
 
 /* Mobile — collapsible nav */
 @media (max-width: 768px) {
+  /* Keep content clear of the floating cart */
+  main.container {
+    padding-bottom: 5.5rem !important;
+  }
+
   .hamburger {
     display: flex;
   }

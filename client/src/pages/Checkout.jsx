@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Checkout() {
   const { cart, totalPrice, clearCart } = useCart();
@@ -63,17 +63,21 @@ function Checkout() {
 
   if (cart.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: '4rem 0' }}>
+      <div className="empty-state">
+        <div className="empty-state-icon" aria-hidden="true">🛒</div>
         <h2>Your cart is empty</h2>
         <p className="checkout-empty-text">Add some products before checking out.</p>
-        <a href="/" className="btn btn-primary">Continue Shopping</a>
+        <Link to="/" className="btn btn-primary">Continue Shopping</Link>
       </div>
     );
   }
 
   return (
     <div className="checkout">
-      <h1 style={{ marginBottom: '1.5rem' }}>Checkout</h1>
+      <div className="checkout-heading">
+        <h1>Checkout</h1>
+        <Link to="/" className="continue-link">&larr; Continue Shopping</Link>
+      </div>
       <div className="checkout-grid">
         <form onSubmit={handleSubmit} className="checkout-form">
           <h2>Shipping Details</h2>
