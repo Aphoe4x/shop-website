@@ -54,6 +54,15 @@ function Home() {
     }
   }
 
+  function scrollToProducts() {
+    document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function selectCategory(name) {
+    setSelectedCategory(name);
+    scrollToProducts();
+  }
+
   function filterProducts() {
     let result = products;
 
@@ -108,7 +117,13 @@ function Home() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="btn btn-primary" onClick={filterProducts}>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                filterProducts();
+                scrollToProducts();
+              }}
+            >
               Search
             </button>
           </div>
@@ -123,7 +138,7 @@ function Home() {
           <div className="categories-grid">
             <div
               className={`category-card ${selectedCategory === 'All' ? 'active' : ''}`}
-              onClick={() => setSelectedCategory('All')}
+              onClick={() => selectCategory('All')}
             >
               <div className="category-icon">🛍️</div>
               <h3>All Products</h3>
@@ -133,7 +148,7 @@ function Home() {
               <div
                 key={cat.name}
                 className={`category-card ${selectedCategory === cat.name ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat.name)}
+                onClick={() => selectCategory(cat.name)}
               >
                 <div className="category-icon">{cat.icon}</div>
                 <h3>{cat.name}</h3>
