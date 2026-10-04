@@ -70,6 +70,23 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Get a single order with its items
+router.get('/detail/:id', async (req, res) => {
+  try {
+    const { data: order, error } = await supabaseAdmin
+      .from('orders')
+      .select('*, order_items(*)')
+      .eq('id', req.params.id)
+      .single();
+
+    if (error) throw error;
+    res.json(order);
+  } catch (error) {
+    console.error('Get order detail error:', error);
+    res.status(500).json({ error: 'Failed to fetch order' });
+  }
+});
+
 // Get orders by email
 router.get('/:email', async (req, res) => {
   try {

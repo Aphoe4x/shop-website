@@ -1,22 +1,64 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate, Link } from 'react-router-dom';
+
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  (window.location.hostname === 'localhost'
+    ? 'http://localhost:3001/api'
+    : 'https://shop-website-6o9u.onrender.com/api');
 
 function Checkout() {
   const { cart, totalPrice, clearCart } = useCart();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [deliveryFees, setDeliveryFees] = useState({ default: 3000 });
+  const [promo, setPromo] = useState(null);
+  const [promoCode, setPromoCode] = useState('');
+  const [promoError, setPromoError] = useState('');
   const [form, setForm] = useState({
     name: '',
     email: '',
     phone: '',
     address: '',
-    city: '',
-    state: '',
+    city: 'Lagos',
+    state: 'Lagos',
   });
+
+  useEffect(() => {
+    fetch(`${API_URL}/meta`)
+      .then((r) => r.json())
+      .then((d) => setDeliveryFees(d.deliveryFees || { default: 3000 }))
+      .catch(() => {});
+  }, []);
+
+  const shipping = cart.length ? deliveryFees[form.city] ?? deliveryFees.default : 0;
+  const discount = promo
+    ? promo.type === 'percent'
+      ? Math.round((totalPrice * promo.value) / 100)
+      : shipping
+    : 0;
+  const grandTotal = Math.max(0, totalPrice + shipping - discount);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const applyPromo = async () => {
+    setPromoError('');
+    try {
+      const res = await fetch(`${API_URL}/meta/promo`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: promoCode, subtotal: totalPrice, shipping }),
+      });
+      if (!res.ok) throw new Error('invalid');
+      const data = await res.json();
+      setPromo({ code: data.code, type: data.type, value: data.value });
+    } catch {
+      setPromo(null);
+      setPromoError('Invalid promo code');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -27,7 +69,7 @@ function Checkout() {
       const orderData = {
         customerName: form.name,
         customerEmail: form.email,
-        totalAmount: totalPrice,
+        totalAmount: grandTotal,
         shippingAddress: `${form.address}, ${form.city}, ${form.state}`,
         items: cart.map((item) => ({
           productId: item.id,
@@ -37,12 +79,6 @@ function Checkout() {
         })),
       };
 
-      const API_URL =
-        import.meta.env.VITE_API_URL ||
-        (window.location.hostname === 'localhost'
-          ? 'http://localhost:3001/api'
-          : 'https://shop-website-6o9u.onrender.com/api');
-
       const res = await fetch(`${API_URL}/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -51,9 +87,10 @@ function Checkout() {
 
       if (!res.ok) throw new Error('Order failed');
 
-      const result = await res.json();
       clearCart();
-      navigate('/orders', { state: { message: 'Order placed successfully! Check your email for confirmation.' } });
+      navigate('/orders', {
+        state: { message: 'Order placed successfully! Check your email for confirmation.' },
+      });
     } catch (error) {
       alert('Failed to place order. Please try again.');
     } finally {
@@ -71,6 +108,8 @@ function Checkout() {
       </div>
     );
   }
+
+  const cities = Object.keys(deliveryFees).filter((c) => c !== 'default');
 
   return (
     <div className="checkout">
@@ -100,7 +139,13 @@ function Checkout() {
           <div className="form-row">
             <div className="form-group">
               <label>City</label>
-              <input name="city" value={form.city} onChange={handleChange} required placeholder="Lagos" />
+              <select name="city" value={form.city} onChange={handleChange}>
+                {cities.map((c) => (
+                  <option key={c} value={c}>
+                    {c} — ₦{(deliveryFees[c] ?? deliveryFees.default).toFixed(2)}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="form-group">
               <label>State</label>
@@ -108,7 +153,7 @@ function Checkout() {
             </div>
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%', marginTop: '1rem' }}>
-            {loading ? 'Placing Order...' : 'Place Order'}
+            {loading ? 'Placing Order...' : `Place Order · ₦${grandTotal.toFixed(2)}`}
           </button>
         </form>
 
@@ -122,11 +167,29 @@ function Checkout() {
           ))}
           <div className="summary-item summary-delivery">
             <span>Delivery</span>
-            <span>Free</span>
+            <span>₦{shipping.toFixed(2)}</span>
           </div>
+          {discount > 0 && (
+            <div className="summary-item summary-delivery">
+              <span>Promo ({promo.code})</span>
+              <span>-₦{discount.toFixed(2)}</span>
+            </div>
+          )}
+          <div className="summary-promo">
+            <input
+              type="text"
+              placeholder="Promo code"
+              value={promoCode}
+              onChange={(e) => setPromoCode(e.target.value)}
+            />
+            <button type="button" className="btn btn-outline" onClick={applyPromo}>
+              Apply
+            </button>
+          </div>
+          {promoError && <p className="promo-error">{promoError}</p>}
           <div className="summary-total">
             <span>Total</span>
-            <span>₦{totalPrice.toFixed(2)}</span>
+            <span>₦{grandTotal.toFixed(2)}</span>
           </div>
         </div>
       </div>

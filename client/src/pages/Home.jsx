@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { useAuth } from '../context/AuthContext';
+import { useShop } from '../context/ShopContext';
 
 const API_URL =
   import.meta.env.VITE_API_URL ||
@@ -27,6 +28,7 @@ const TRUST_BADGES = [
 
 function Home() {
   const { user, logout } = useAuth();
+  const { recent } = useShop();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -187,6 +189,20 @@ function Home() {
           )}
         </div>
       </section>
+
+      {/* Recently Viewed */}
+      {recent.length > 0 && (
+        <section className="recently-viewed">
+          <div className="container">
+            <h2 className="section-title">Recently Viewed</h2>
+            <div className="products-grid">
+              {recent.slice(0, 4).map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Trust Badges */}
       <section className="trust-badges">

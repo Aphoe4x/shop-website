@@ -7,6 +7,8 @@ import authRoutes from './routes/auth.js';
 import productRoutes from './routes/products.js';
 import orderRoutes from './routes/orders.js';
 import cartRoutes from './routes/cart.js';
+import reviewRoutes from './routes/reviews.js';
+import metaRoutes from './routes/meta.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -44,6 +46,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/meta', metaRoutes);
 
 // Mobile PWA (served from the same origin/API)
 app.use('/mobile', express.static(path.join(__dirname, '../public/mobile')));

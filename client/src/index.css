@@ -1278,3 +1278,131 @@ input:focus, textarea:focus {
     width: 100%;
   }
 }
+
+/* ---------- Wishlist / badges ---------- */
+.product-image { position: relative; }
+.wish-heart {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+.wish-heart.active { background: #ffe9ec; }
+.product-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.product-badge.sale { background: #e8b923; color: #1a1a2e; }
+.product-badge.low { background: #dc2626; color: #fff; top: 34px; }
+.product-old-price {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+/* ---------- Floating helpers ---------- */
+.back-to-top {
+  position: fixed;
+  left: 20px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  box-shadow: var(--card-shadow-hover);
+  z-index: 40;
+}
+.whatsapp-float {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+  z-index: 40;
+}
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  padding: 4px 8px;
+}
+
+/* ---------- Product detail extras ---------- */
+.detail-rating { display: flex; align-items: center; gap: 8px; margin: 4px 0 8px; }
+.detail-rating-count { color: var(--text-tertiary); font-size: 0.8rem; }
+.stars { color: #e8b923; letter-spacing: 1px; }
+.detail-stock { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 12px; }
+.detail-buttons { display: flex; gap: 10px; margin-top: 12px; }
+.detail-buttons .btn-block { flex: 1; }
+.btn-whatsapp { background: #25d366; color: #fff; }
+.reviews-section, .related-section { margin-top: 3rem; }
+.reviews-section h2, .related-section h2 { margin-bottom: 1rem; }
+.review-item { border-bottom: 1px solid var(--border-color); padding: 12px 0; }
+.review-head { display: flex; justify-content: space-between; align-items: center; }
+.review-comment { color: var(--text-secondary); margin-top: 4px; }
+.review-form { display: flex; flex-direction: column; gap: 10px; margin-top: 1rem; max-width: 420px; }
+.review-form select, .review-form textarea {
+  padding: 10px; border: 1px solid var(--border-color); border-radius: 8px;
+  background: var(--bg-primary); color: var(--text-primary); font-family: inherit;
+}
+
+/* ---------- Checkout promo ---------- */
+.summary-promo { display: flex; gap: 8px; margin-top: 12px; }
+.summary-promo input {
+  flex: 1; padding: 10px; border: 1px solid var(--border-color);
+  border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);
+}
+.promo-error { color: #dc2626; font-size: 0.8rem; margin-top: 6px; }
+
+/* ---------- Dark mode ---------- */
+[data-theme='dark'] {
+  --bg-primary: #0d0d14;
+  --bg-secondary: #16161f;
+  --bg-tertiary: #1f1f2b;
+  --text-primary: #f2f3f7;
+  --text-secondary: #b8bcc6;
+  --text-tertiary: #8a8f9a;
+  --border-color: #2a2a38;
+  --accent-subtle: #23233a;
+}
+[data-theme='dark'] body { background: var(--bg-primary); color: var(--text-primary); }
+[data-theme='dark'] .product-card,
+[data-theme='dark'] .checkout-form,
+[data-theme='dark'] .order-summary,
+[data-theme='dark'] .order-card,
+[data-theme='dark'] .login-card,
+[data-theme='dark'] .footer { background: var(--bg-secondary); }
+[data-theme='dark'] .search-bar input,
+[data-theme='dark'] input,
+[data-theme='dark'] select,
+[data-theme='dark'] textarea { background: var(--bg-secondary); color: var(--text-primary); }

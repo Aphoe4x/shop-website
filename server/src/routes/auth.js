@@ -117,4 +117,31 @@ router.get('/me', async (req, res) => {
   }
 });
 
+// Update the current user's profile
+router.put('/profile', async (req, res) => {
+  try {
+    const { userId, name, avatarUrl } = req.body;
+    if (!userId) {
+      return res.status(400).json({ error: 'userId is required' });
+    }
+
+    const updates = {};
+    if (typeof name === 'string' && name.trim()) updates.name = name.trim();
+    if (typeof avatarUrl === 'string') updates.avatar_url = avatarUrl;
+
+    const { data: user, error } = await supabaseAdmin
+      .from('users')
+      .update(updates)
+      .eq('id', userId)
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.json({ id: user.id, email: user.email, name: user.name, avatar_url: user.avatar_url });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ error: 'Failed to update profile' });
+  }
+});
+
 export default router;

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no"
     />
-    <meta name="theme-color" content="#0f7b4f" />
+    <meta name="theme-color" content="#1a1a2e" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -19,12 +19,28 @@
   </head>
   <body>
     <header class="app-header">
+      <button id="back-btn" class="icon-btn" type="button" aria-label="Back" hidden>‹</button>
       <div class="brand">
         <span class="brand-mark">S</span>
         <span class="brand-name">Shopping</span>
       </div>
-      <button id="account-btn" class="account-btn" type="button">Sign in</button>
+      <div class="header-actions">
+        <button id="theme-btn" class="icon-btn" type="button" aria-label="Toggle theme">🌙</button>
+        <button id="search-btn" class="icon-btn" type="button" aria-label="Search">🔍</button>
+        <button id="account-btn" class="account-btn" type="button">Sign in</button>
+      </div>
     </header>
+
+    <div id="search-bar" class="search-bar" hidden>
+      <input id="search-input" type="search" placeholder="Search products…" autocomplete="off" />
+      <button id="search-close" class="search-close" type="button" aria-label="Close search">✕</button>
+    </div>
+
+    <div id="install-banner" class="install-banner" hidden>
+      <span>Install Shopping on your home screen for the full app experience.</span>
+      <button id="install-btn" type="button">Install</button>
+      <button id="install-dismiss" type="button" aria-label="Dismiss">✕</button>
+    </div>
 
     <main id="view" class="view"></main>
 
@@ -35,25 +51,43 @@
         <span>·</span>
         <a href="/#products" target="_blank" rel="noopener">Products</a>
         <span>·</span>
-        <a href="/contact" target="_blank" rel="noopener">Contact</a>
+        <a href="https://wa.me/2348000000000" target="_blank" rel="noopener">WhatsApp</a>
       </div>
       <p class="footer-note">Lagos, Nigeria · abdulbasitafolabi7@gmail.com</p>
       <p class="footer-copy">© 2026 Shopping. All rights reserved.</p>
     </footer>
 
+    <button id="to-top" class="to-top" type="button" aria-label="Back to top" hidden>↑</button>
+
+    <div class="fab-stack">
+      <a id="fab-whatsapp" class="fab fab-whatsapp" href="https://wa.me/2348000000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+      <button id="fab-cart" class="fab fab-cart" type="button" aria-label="Open cart" hidden>
+        🛒
+        <span id="fab-cart-badge" class="fab-badge" hidden>0</span>
+      </button>
+    </div>
+
     <nav class="tabbar">
       <button id="tab-shop" class="tab is-active" type="button">
-        <span class="tab-icon">🛍️</span>
-        <span>Shop</span>
+        <span class="tab-icon">🛍️</span><span>Shop</span>
+      </button>
+      <button id="tab-wishlist" class="tab" type="button">
+        <span class="tab-icon">❤️</span><span>Wishlist</span>
       </button>
       <button id="tab-cart" class="tab" type="button">
-        <span class="tab-icon">🛒</span>
-        <span>Cart</span>
+        <span class="tab-icon">🛒</span><span>Cart</span>
         <span id="cart-badge" class="cart-badge" hidden>0</span>
+      </button>
+      <button id="tab-orders" class="tab" type="button">
+        <span class="tab-icon">📦</span><span>Orders</span>
+      </button>
+      <button id="tab-profile" class="tab" type="button">
+        <span class="tab-icon">👤</span><span>Profile</span>
       </button>
     </nav>
 
     <div id="toast" class="toast" hidden></div>
+    <div id="success" class="success" hidden><div class="success-ring">✓</div></div>
 
     <script src="app.js"></script>
   </body>

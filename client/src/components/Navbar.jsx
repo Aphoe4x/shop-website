@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useShop } from '../context/ShopContext';
 
 function Navbar() {
   const { totalItems } = useCart();
   const { user, logout } = useAuth();
+  const { wishlist, theme, toggleTheme } = useShop();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -29,10 +31,20 @@ function Navbar() {
           <Link to="/about" onClick={closeMenu}>About</Link>
           <Link to="/contact" onClick={closeMenu}>Contact</Link>
           <Link to="/orders" onClick={closeMenu}>My Orders</Link>
+          <Link to="/wishlist" onClick={closeMenu}>
+            Wishlist{wishlist.length > 0 ? ` (${wishlist.length})` : ''}
+          </Link>
           <Link to="/checkout" className="cart-link" onClick={closeMenu}>
             Cart
             {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
           </Link>
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle dark mode"
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
           {user ? (
             <div className="user-menu">
               <span className="user-name">Hi, {user.name?.split(' ')[0]}</span>
