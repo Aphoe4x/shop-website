@@ -9,8 +9,9 @@ const client = new OAuth2Client(
 
 /**
  * Generate Google OAuth2 consent screen URL
+ * @param {string} [state] - Optional state passed back on callback.
  */
-export function getGoogleAuthUrl() {
+export function getGoogleAuthUrl(state) {
   const scopes = [
     'https://www.googleapis.com/auth/userinfo.profile',
     'https://www.googleapis.com/auth/userinfo.email',
@@ -20,6 +21,7 @@ export function getGoogleAuthUrl() {
     access_type: 'offline',
     scope: scopes,
     prompt: 'consent',
+    ...(state ? { state } : {}),
   });
 }
 

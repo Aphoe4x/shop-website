@@ -76,6 +76,16 @@ CREATE POLICY "Anyone can create users" ON users
 CREATE POLICY "Users can read own data" ON users
   FOR SELECT USING (true);
 
+-- Cart items table (server-side cart for cross-device sync)
+CREATE TABLE IF NOT EXISTS cart_items (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  product_id UUID REFERENCES products(id) ON DELETE CASCADE,
+  quantity INTEGER NOT NULL DEFAULT 1,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE (user_id, product_id)
+);
+
 -- Insert sample products
 INSERT INTO products (name, description, price, category, stock) VALUES
   ('Ankara Print Dress', 'Beautiful Nigerian Ankara print dress, perfect for any occasion.', 15000.00, 'Fashion', 50),

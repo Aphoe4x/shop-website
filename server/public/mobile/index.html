@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#0f7b4f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Shopping" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="icon" href="icons/icon-192.png" />
+    <title>Shopping</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">S</span>
+        <span class="brand-name">Shopping</span>
+      </div>
+      <button id="account-btn" class="account-btn" type="button">Sign in</button>
+    </header>
+
+    <main id="view" class="view"></main>
+
+    <footer class="app-footer">
+      <div class="footer-brand">Shopping</div>
+      <div class="footer-links">
+        <a href="/" target="_blank" rel="noopener">Website</a>
+        <span>·</span>
+        <a href="/#products" target="_blank" rel="noopener">Products</a>
+        <span>·</span>
+        <a href="/contact" target="_blank" rel="noopener">Contact</a>
+      </div>
+      <p class="footer-note">Lagos, Nigeria · abdulbasitafolabi7@gmail.com</p>
+      <p class="footer-copy">© 2026 Shopping. All rights reserved.</p>
+    </footer>
+
+    <nav class="tabbar">
+      <button id="tab-shop" class="tab is-active" type="button">
+        <span class="tab-icon">🛍️</span>
+        <span>Shop</span>
+      </button>
+      <button id="tab-cart" class="tab" type="button">
+        <span class="tab-icon">🛒</span>
+        <span>Cart</span>
+        <span id="cart-badge" class="cart-badge" hidden>0</span>
+      </button>
+    </nav>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

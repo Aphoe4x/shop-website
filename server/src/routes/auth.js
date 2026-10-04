@@ -7,7 +7,13 @@ const router = Router();
 
 // Step 1: Redirect to Google consent screen
 router.get('/google', (req, res) => {
-  const authUrl = getGoogleAuthUrl();
+  // Optional relative path to return to after login (e.g. "/mobile/").
+  const redirect = typeof req.query.redirect === 'string' ? req.query.redirect : '';
+  const safeRedirect = redirect.startsWith('/') ? redirect : '';
+  const state = Buffer.from(JSON.stringify({ redirect: safeRedirect })).toString(
+    'base64url'
+  );
+  const authUrl = getGoogleAuthUrl(state);
   res.redirect(authUrl);
 });
 
@@ -53,14 +59,29 @@ router.get('/google/callback', async (req, res) => {
       user = newUser;
     }
 
-    // Redirect to frontend with user info (in production, use JWT tokens)
+    // Redirect back to the requesting app: web (default) or a relative
+    // path on this server (e.g. the mobile PWA at "/mobile/").
+    let base = `${config.clientUrl}/auth/callback`;
+    try {
+      if (req.query.state) {
+        const parsed = JSON.parse(
+          Buffer.from(String(req.query.state), 'base64url').toString('utf8')
+        );
+        if (parsed?.redirect && parsed.redirect.startsWith('/')) {
+          base = `${req.protocol}://${req.get('host')}${parsed.redirect}`;
+        }
+      }
+    } catch (stateError) {
+      console.warn('Could not parse auth state:', stateError.message);
+    }
+
     const params = new URLSearchParams({
       userId: user.id,
       email: user.email,
       name: user.name,
     });
 
-    res.redirect(`${config.clientUrl}/auth/callback?${params}`);
+    res.redirect(`${base}?${params}`);
   } catch (error) {
     console.error('Google auth callback error:', error);
     res.redirect(`${config.clientUrl}/login?error=auth_failed`);
