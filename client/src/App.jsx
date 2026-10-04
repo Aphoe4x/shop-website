@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Toast from './components/Toast';
 import FloatingCart from './components/FloatingCart';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 import BackToTop from './components/BackToTop';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
@@ -32,15 +33,7 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
         </Routes>
       </main>
-      <a
-        className="whatsapp-float"
-        href="https://wa.me/2348000000000"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-      >
-        💬
-      </a>
+      <FloatingWhatsApp />
       <FloatingCart />
       <BackToTop />
       <Toast />

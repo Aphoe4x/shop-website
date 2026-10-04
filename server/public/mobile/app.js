@@ -297,6 +297,8 @@ function renderCartBadges() {
   });
   const fab = document.getElementById('fab-cart');
   if (fab) fab.hidden = total === 0;
+  const wa = document.getElementById('fab-whatsapp');
+  if (wa) wa.hidden = total === 0;
 }
 
 /* ----------------------------- products ----------------------------- */

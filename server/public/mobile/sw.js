@@ -1,5 +1,5 @@
 /* Simple app-shell service worker. API calls are never cached. */
-const CACHE = 'shopping-mobile-v3';
+const CACHE = 'shopping-mobile-v4';
 const ASSETS = [
   './',
   './index.html',
