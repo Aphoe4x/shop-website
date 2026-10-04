@@ -245,14 +245,14 @@ function Home() {
               <h4>Help</h4>
               <Link to="/contact">Contact Us</Link>
               <Link to="/orders">Track Order</Link>
-              <a href="#">Shipping & Delivery</a>
-              <a href="#">FAQs</a>
+              <Link to="/shipping">Shipping &amp; Delivery</Link>
+              <Link to="/faq">FAQs</Link>
             </div>
             <div>
               <h4>Company</h4>
               <Link to="/about">About Us</Link>
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms & Conditions</a>
+              <Link to="/privacy">Privacy Policy</Link>
+              <Link to="/terms">Terms &amp; Conditions</Link>
             </div>
             <div>
               <h4>Contact</h4>
