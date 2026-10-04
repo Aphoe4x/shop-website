@@ -899,7 +899,6 @@ function updateTabs() {
     'is-active',
     state.tab === 'wishlist'
   );
-  document.getElementById('tab-cart').classList.toggle('is-active', state.tab === 'cart');
   document.getElementById('tab-orders').classList.toggle('is-active', state.tab === 'orders');
   document.getElementById('tab-profile').classList.toggle(
     'is-active',
@@ -1130,7 +1129,6 @@ function init() {
 
   document.getElementById('tab-shop').onclick = () => switchTab('shop');
   document.getElementById('tab-wishlist').onclick = () => switchTab('wishlist');
-  document.getElementById('tab-cart').onclick = () => switchTab('cart');
   document.getElementById('tab-orders').onclick = () => {
     switchTab('orders');
     loadOrders();

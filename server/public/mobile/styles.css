@@ -1,7 +1,11 @@
+[hidden] {
+  display: none !important;
+}
+
 :root {
-  --navy: #1a1a2e;
-  --navy-dark: #16213e;
-  --navy-soft: #eef0f6;
+  --navy: #0f7b4f;
+  --navy-dark: #0a5c3a;
+  --navy-soft: #e7f4ee;
   --gold: #e8b923;
   --ink: #222222;
   --muted: #6b7280;
@@ -15,9 +19,9 @@
 }
 
 [data-theme="dark"] {
-  --navy: #12121a;
-  --navy-dark: #05050a;
-  --navy-soft: #23233a;
+  --navy: #17a56a;
+  --navy-dark: #0b3d28;
+  --navy-soft: #16281f;
   --ink: #f2f3f7;
   --muted: #9aa0ac;
   --line: #2a2a38;
@@ -217,7 +221,7 @@ body {
   border-radius: 14px;
   padding: 14px;
   color: #fff;
-  background: linear-gradient(135deg, #2b2b52, var(--navy));
+  background: linear-gradient(135deg, #14915f, var(--navy));
   position: relative;
 }
 
@@ -799,7 +803,7 @@ body {
 .fab-stack {
   position: fixed;
   right: 14px;
-  bottom: calc(84px + var(--safe-bottom));
+  bottom: calc(140px + var(--safe-bottom));
   z-index: 28;
   display: flex;
   flex-direction: column;
@@ -849,7 +853,7 @@ body {
 
 .to-top {
   position: fixed;
-  left: 14px;
+  right: 14px;
   bottom: calc(84px + var(--safe-bottom));
   z-index: 28;
   width: 44px;

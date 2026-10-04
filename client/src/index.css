@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --accent: #1a1a2e;
-  --accent-dark: #16213e;
-  --accent-subtle: #f0f0f0;
+  --accent: #0f7b4f;
+  --accent-dark: #0a5c3a;
+  --accent-subtle: #e7f4ee;
+  --gold: #e8b923;
   --bg-primary: #fafafa;
   --bg-secondary: #f0f0f0;
   --bg-tertiary: #e8e8e8;
@@ -1321,8 +1322,8 @@ input:focus, textarea:focus {
 /* ---------- Floating helpers ---------- */
 .back-to-top {
   position: fixed;
-  left: 20px;
-  bottom: 24px;
+  right: 20px;
+  bottom: 152px;
   width: 46px;
   height: 46px;
   border-radius: 999px;
@@ -1406,3 +1407,37 @@ input:focus, textarea:focus {
 [data-theme='dark'] input,
 [data-theme='dark'] select,
 [data-theme='dark'] textarea { background: var(--bg-secondary); color: var(--text-primary); }
+
+/* Compact floating cart (website) */
+.floating-cart-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 88px;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+  z-index: 40;
+}
+.floating-cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--gold);
+  color: #14361f;
+  font-size: 0.68rem;
+  font-weight: 800;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
