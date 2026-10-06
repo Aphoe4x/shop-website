@@ -1,0 +1,30 @@
+HNG Lesson 3 — Mobile Application Submission
+==============================================
+
+1) GitHub PR link (Zedu contribution)
+   https://github.com/zedu-hng/zedu-fe/pull/216
+
+2) APK download link (the built APK)
+   https://expo.dev/artifacts/eas/7x5ezmZSnNaxKly5kkDtueJLOpXfKaZdB_Pz88rC5sA.apk
+   → To do yourselves: download it from this link, upload to Google Drive, and set sharing to "Anyone with the link". Then paste that Google Drive link in the submission form.
+
+3) Mobile app repository link
+   https://github.com/Aphoe4x/shop-website
+   (the mobile app source lives in "shop-website/mobile-app")
+
+4) Video demonstration link
+   [Paste your Google Drive / YouTube link after recording]
+
+Suggested caption for the video:
+   Single continuous demo on a physical Android phone:
+   1. Open the web app and log in with a new/account account.
+   2. Add a product to the web cart.
+   3. Open the mobile APK and log in with the SAME Google account.
+   4. Show the web-added item already appears in the phone's cart.
+   5. Add another item from the phone app.
+   6. Return to the web app and show that new item is now in the web cart without refreshing.
+
+Useful extra links (not required but nice):
+   - Website: https://shop-website-dun.vercel.app
+   - Mobile PWA: https://shop-website-6o9u.onrender.com/mobile/
+   - Backend/API: https://shop-website-6o9u.onrender.com

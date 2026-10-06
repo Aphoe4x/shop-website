@@ -13,6 +13,9 @@ import metaRoutes from './routes/meta.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
+// Behind Render's proxy, trust X-Forwarded-Proto so req.protocol is https.
+app.set('trust proxy', true);
+
 // Middleware
 const allowedOrigins = [
   config.clientUrl,
